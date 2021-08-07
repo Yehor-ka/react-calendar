@@ -4,7 +4,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import SaveDialog from './SaveDialog';
-import EditDialog from './EditDialog';
 
 const getDropEvent = (calendarEvents, dateId) => {
   for (let item = 0; item < calendarEvents.length; item++) {
@@ -143,7 +142,6 @@ function EventCalendar() {
         isWholeDay={isWholeDay}
         setIsWholeDay={setIsWholeDay}
       />
-      <EditDialog />
     </div>
   );
 }
