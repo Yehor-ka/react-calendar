@@ -28,8 +28,6 @@ function SaveDialog({
     backgroundColor: '',
   });
   const [isTitleError, setIsTitleError] = React.useState(true);
-  //const [isWholeDay, setIsWholeDay] = React.useState(true);
-  console.log(newEvent);
 
   const handleClose = () => {
     setNewEvent({
@@ -54,9 +52,6 @@ function SaveDialog({
     onCloseEdit(false);
   };
 
-  //console.log('new event', newEvent);
-  //console.log('open now event', eventOpenNow);
-
   const handleEditEvent = () => {
     console.log(eventOpenNow.time, newEvent.time);
     const editedEvents = eventsInfo.map((editedEvent) => {
@@ -65,9 +60,9 @@ function SaveDialog({
           title: newEvent.title || eventOpenNow.title,
           date: newEvent.date || eventOpenNow.date,
           backgroundColor: newEvent.backgroundColor || eventOpenNow.backgroundColor,
-          allDay: isWholeDay, //newEvent.allDay,
+          allDay: isWholeDay,
           time: newEvent.time || eventOpenNow.time,
-          start: new Date(`${eventOpenNow.date} ${newEvent.time}`),
+          start: new Date(`${newEvent.date || eventOpenNow.date} ${newEvent.time}`),
           description: newEvent.description || eventOpenNow.description,
           id: Number(eventOpenNow.id),
         };
@@ -106,13 +101,12 @@ function SaveDialog({
   const onChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    //console.log(name, typeof value);
     if (name === 'allDay' && (value === 'true' || value === true)) {
       setIsWholeDay(true);
     } else if (name === 'allDay' && (value === 'false' || value === false)) {
       setIsWholeDay(false);
     }
-    if (name === 'title' && (value === '' || value.length > 30)) {
+    if (name === 'title' && (value.length === 0 || value.length > 30)) {
       setIsTitleError(true);
     } else {
       setIsTitleError(false);
@@ -170,9 +164,7 @@ function SaveDialog({
             label="event time"
             type="time"
             name="time"
-            defaultValue={
-              isOpenEdit ? eventOpenNow.time : '08:30'
-            } /* {isOpenEdit ? eventOpenNow.time : "08:30"} */
+            defaultValue={isOpenEdit ? eventOpenNow.time : '08:30'}
             fullWidth
             InputLabelProps={{
               shrink: true,

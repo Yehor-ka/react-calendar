@@ -57,18 +57,14 @@ function EventCalendar() {
           id: eventId,
           allDay: allDayEvent,
           start: new Date(`${addedEvent.date}T${addedEvent.time}:00`),
-          /* start: new Date(`${prevState.date} ${prevState.time}`) , */
         },
       ]);
     } else {
       alert('Пожалуйста укажите дату');
     }
   };
-  //console.log(eventsInfo);
 
   const handleDateClick = (dateClickInfo) => {
-    /*dateClickInfo.date = new Date('2021-08-06');*/
-    //console.log(dateClickInfo.view.currentStart);
     setDateClickItem(dateClickInfo.dateStr);
     setIsOpenDialog(true);
   };
