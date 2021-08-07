@@ -54,12 +54,11 @@ function SaveDialog({
   };
 
   const handleEditEvent = () => {
-    console.log(eventOpenNow.time, newEvent.time);
     const editedEvents = eventsInfo.map((editedEvent) => {
       if (Number(editedEvent.id) === Number(eventOpenNow.id)) {
         return {
           title: eventOpenNow.title,
-          date:  eventOpenNow.date,
+          date: eventOpenNow.date,
           backgroundColor: eventOpenNow.backgroundColor,
           allDay: isWholeDay,
           time: eventOpenNow.time,
@@ -111,18 +110,17 @@ function SaveDialog({
       setIsTitleError(true);
     } else {
       setIsTitleError(false);
-      if(isOpen) {
+      if (isOpen) {
         setNewEvent((prevState) => ({
           ...prevState,
           [name]: value,
         }));
       } else {
-        setEventOpenNow(prevState => ({
+        setEventOpenNow((prevState) => ({
           ...prevState,
           [name]: value,
-        }))
+        }));
       }
-      
     }
   };
 

@@ -48,7 +48,6 @@ function EventCalendar() {
   const handleAddEvent = (addedEvent) => {
     if (addedEvent.date !== '') {
       const allDayEvent = addedEvent.allDay === 'true' || addedEvent.allDay === true ? true : false;
-      console.log(allDayEvent);
       setEventId((prevState) => prevState + 1);
       setEventInfo((prevState) => [
         ...prevState,
@@ -72,9 +71,7 @@ function EventCalendar() {
   const handleDrop = (date) => {
     const dateEvent = new Date(date.event._instance.range.start);
     const newDate = structureDate(dateEvent);
-    console.log(newDate);
     const dragAndDropEvent = getDropEvent(eventsInfo, date.event._def.publicId);
-    console.log(dragAndDropEvent);
 
     const OtherEvents = eventsInfo.filter(
       (item) => Number(item.id) !== Number(date.event._def.publicId),
@@ -87,12 +84,10 @@ function EventCalendar() {
         start: new Date(`${newDate}T${dragAndDropEvent.time}:00`),
       },
     ];
-    console.log('new events', newEvents);
     setEventInfo(newEvents);
   };
 
   const eventEdit = (eventClick) => {
-    console.log('start', `${eventClick.event.start}`.slice(16, 21));
     const timeDate = `${eventClick.event.start}`.slice(16, 21);
     setIsWholeDay(eventClick.event.allDay);
     setEventOpenNow({
