@@ -129,6 +129,7 @@ function EventCalendar() {
         eventsInfo={eventsInfo}
         setEventInfo={setEventInfo}
         eventOpenNow={eventOpenNow}
+        setEventOpenNow={setEventOpenNow}
         isOpenEdit={isOpenEdit}
         onCloseEdit={setIsOpenEdit}
         dateClickItem={dateClickItem}

@@ -8,6 +8,7 @@ import { IconButton } from '@material-ui/core';
 
 function SaveDialog({
   eventOpenNow,
+  setEventOpenNow,
   dateClickItem,
   isOpen,
   onClose,
@@ -57,13 +58,13 @@ function SaveDialog({
     const editedEvents = eventsInfo.map((editedEvent) => {
       if (Number(editedEvent.id) === Number(eventOpenNow.id)) {
         return {
-          title: newEvent.title || eventOpenNow.title,
-          date: newEvent.date || eventOpenNow.date,
-          backgroundColor: newEvent.backgroundColor || eventOpenNow.backgroundColor,
+          title: eventOpenNow.title,
+          date:  eventOpenNow.date,
+          backgroundColor: eventOpenNow.backgroundColor,
           allDay: isWholeDay,
-          time: newEvent.time || eventOpenNow.time,
-          start: new Date(`${newEvent.date || eventOpenNow.date} ${newEvent.time}`),
-          description: newEvent.description || eventOpenNow.description,
+          time: eventOpenNow.time,
+          start: new Date(`${eventOpenNow.date} ${eventOpenNow.time}`),
+          description: eventOpenNow.description,
           id: Number(eventOpenNow.id),
         };
       }
@@ -110,10 +111,18 @@ function SaveDialog({
       setIsTitleError(true);
     } else {
       setIsTitleError(false);
-      setNewEvent((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      if(isOpen) {
+        setNewEvent((prevState) => ({
+          ...prevState,
+          [name]: value,
+        }));
+      } else {
+        setEventOpenNow(prevState => ({
+          ...prevState,
+          [name]: value,
+        }))
+      }
+      
     }
   };
 
